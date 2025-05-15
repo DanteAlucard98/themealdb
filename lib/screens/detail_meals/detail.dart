@@ -6,7 +6,22 @@ class DetailMealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Placeholder(),
+      body: detailmeals(),
+    );
+  }
+}
+
+class detailmeals extends StatelessWidget {
+  const detailmeals({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('detail meals'),
+      ],
     );
   }
 }

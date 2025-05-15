@@ -1,5 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Environment {
-  static String urlBase = dotenv.env['URL_BASE'] ?? '';
+  static String get urlBase {
+    return dotenv.env['URL_BASE'] ?? '';
+  }
 }

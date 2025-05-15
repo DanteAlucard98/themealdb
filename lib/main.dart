@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recetas_adpp_2025/bloc/providers.dart';
 import 'package:recetas_adpp_2025/config/router/app_router.dart';
-import 'package:responsive_framework/responsive_framework.dart'; // Add this import
+import 'package:responsive_framework/responsive_framework.dart';
 
-void main() {
+void main() async {
+  // Asegurarse de que los bindings de Flutter estén inicializados
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Cargar el archivo .env
+  await dotenv.load(fileName: ".env.template");
+  
   runApp(const MyApp());
 }
 
@@ -17,30 +25,29 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder:
-          (context, child) => ResponsiveBreakpoints.builder(
-            child: MaterialApp.router(
-              routerConfig: appRouter,
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primaryColor: Colors.blue,
-                inputDecorationTheme: InputDecorationTheme(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.grey, width: 1.5),
-                  ),
+      builder: (context, child) => AppProviders(
+        child: ResponsiveBreakpoints.builder(
+          child: MaterialApp.router(
+            routerConfig: appRouter,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primaryColor: Colors.blue,
+              inputDecorationTheme: InputDecorationTheme(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: Colors.grey, width: 1.5),
                 ),
               ),
             ),
-            breakpoints: [
-             const Breakpoint(start: 0, end: 450, name: MOBILE),
-              const Breakpoint(start: 451, end: 800, name: TABLET),
-              const Breakpoint(start: 801, end: 1920, name: DESKTOP),
-              const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
-
-            ],
           ),
-          
+          breakpoints: [
+            const Breakpoint(start: 0, end: 450, name: MOBILE),
+            const Breakpoint(start: 451, end: 800, name: TABLET),
+            const Breakpoint(start: 801, end: 1920, name: DESKTOP),
+            const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+          ],
+        ),
+      ),
     );
   }
 }
