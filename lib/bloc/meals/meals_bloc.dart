@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_event.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_state.dart';
-import 'package:recetas_adpp_2025/infraestructure/datasources/meal_datasources.dart';
+import 'package:recetas_adpp_2025/infraestructure/datasources/list_meal_datasources.dart';
 
 class MealsBloc extends Bloc<MealsEvent, MealsState> {
   final ListDatasource _listDatasource;

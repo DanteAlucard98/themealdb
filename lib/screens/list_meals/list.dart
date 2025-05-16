@@ -137,7 +137,7 @@ class ListMealContent extends StatelessWidget {
                       
                       // Renderizar el widget de buildMealCard con los datos de la API
                       final meal = state.meals[index];
-                      return buildMealCard(meal.strMeal, meal.strMealThumb.isNotEmpty ? meal.strMealThumb : null, context);
+                      return buildMealCard(meal.idMeal,meal.strMeal, meal.strMealThumb.isNotEmpty ? meal.strMealThumb : null, context);
                     },
                   );
               }

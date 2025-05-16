@@ -1,10 +1,10 @@
-import 'package:recetas_adpp_2025/domain/entities/meal.dart';
+import 'package:recetas_adpp_2025/domain/entities/list_meal.dart';
 
 enum MealsStatus { initial, loading, success, failure, loadingMore }
 
 class MealsState {
   final MealsStatus status;
-  final List<Meal> meals;
+  final List<ListMeal> meals;
   final String errorMessage;
   final String currentLetter;
   final bool hasReachedMax;
@@ -23,7 +23,7 @@ class MealsState {
 
   MealsState copyWith({
     MealsStatus? status,
-    List<Meal>? meals,
+    List<ListMeal>? meals,
     String? errorMessage,
     String? currentLetter,
     bool? hasReachedMax,

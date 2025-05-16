@@ -11,10 +11,13 @@ final appRouter = GoRouter(
       builder: (context, state) => const PrincipalScreen(),
       routes: [
         GoRoute(
-          path: 'detail',
-          name: DetailMealsScreen.name,
-          builder: (context, state) => const DetailMealsScreen(),
-        ),
+      path: '/detail/:mealId',
+      name: 'detail-meals-screen',
+      builder: (context, state) {
+        final mealId = state.pathParameters['mealId']!;
+        return DetailMealsScreen(mealId: mealId);
+      },
+    ),
       ],
     ),
   ],

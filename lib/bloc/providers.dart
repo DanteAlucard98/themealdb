@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_barrel.dart';
+import 'package:recetas_adpp_2025/bloc/specific_meal/bloc/specific_bloc.dart';
+import 'package:recetas_adpp_2025/infraestructure/datasources/list_meal_datasources.dart';
 import 'package:recetas_adpp_2025/infraestructure/datasources/meal_datasources.dart';
 
 class AppProviders extends StatelessWidget {
   final Widget child;
 
   const AppProviders({
-    Key? key,
+    super.key,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class AppProviders extends StatelessWidget {
             listDatasource: ListDatasource(),
           ),
         ),
-        // Aquí puedes agregar más BlocProviders conforme tu aplicación crezca
+        BlocProvider(
+          create: (context) => SpecificBloc(
+            mealDatasource: MealDatasource(),
+          ),
+        ),
       ],
       child: child,
     );
