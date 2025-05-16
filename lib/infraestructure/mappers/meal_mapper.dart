@@ -1,61 +1,36 @@
 import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 
 class MealMapper {
-  static Meal fromJson(Map<String, String?> json) {
-    return Meal(
-      idMeal: json['idMeal']??'',
-      strMeal: json['strMeal']??'',
-      strDrinkAlternate: json['strDrinkAlternate']??'',
-      strCategory: json['strCategory']??'',
-      strArea: json['strArea']??'',
-      strInstructions: json['strInstructions']??'',
-      strMealThumb: json['strMealThumb']??'',
-      strTags: json['strTags']??'',
-      strYoutube: json['strYoutube']??'',
-      strIngredient1: json['strIngredient1']??'',
-      strIngredient2: json['strIngredient2']??'',
-      strIngredient3: json['strIngredient3']??'',
-      strIngredient4: json['strIngredient4']??'',
-      strIngredient5: json['strIngredient5']??'',
-      strIngredient6: json['strIngredient6']??'',
-      strIngredient7: json['strIngredient7']??'',
-      strIngredient8: json['strIngredient8']??'',
-      strIngredient9: json['strIngredient9']??'',
-      strIngredient10: json['strIngredient10']??'',
-      strIngredient11: json['strIngredient11']??'',
-      strIngredient12: json['strIngredient12']??'',
-      strIngredient13: json['strIngredient13']??'',
-      strIngredient14: json['strIngredient14']??'',
-      strIngredient15: json['strIngredient15']??'',
-      strIngredient16: json['strIngredient16']??'',
-      strIngredient17: json['strIngredient17']??'',
-      strIngredient18: json['strIngredient18']??'',
-      strIngredient19: json['strIngredient19']??'',
-      strIngredient20: json['strIngredient20']??'',
-      strMeasure1: json['strMeasure1']??'',
-      strMeasure2: json['strMeasure2']??'',
-      strMeasure3: json['strMeasure3']??'',
-      strMeasure4: json['strMeasure4']??'',
-      strMeasure5: json['strMeasure5']??'',
-      strMeasure6: json['strMeasure6']??'',
-      strMeasure7: json['strMeasure7']??'',
-      strMeasure8: json['strMeasure8']??'',
-      strMeasure9: json['strMeasure9']??'',
-      strMeasure10: json['strMeasure10']??'',
-      strMeasure11: json['strMeasure11']??'',
-      strMeasure12: json['strMeasure12']??'',
-      strMeasure13: json['strMeasure13']??'',
-      strMeasure14: json['strMeasure14']??'',
-      strMeasure15: json['strMeasure15']??'',
-      strMeasure16: json['strMeasure16']??'',
-      strMeasure17: json['strMeasure17']??'',
-      strMeasure18: json['strMeasure18']??'',
-      strMeasure19: json['strMeasure19']??'',
-      strMeasure20: json['strMeasure20']??'',
-      strSource: json['strSource']??'',
-      strImageSource: json['strImageSource']??'',
-      strCreativeCommonsConfirmed: json['strCreativeCommonsConfirmed']??'',
-      dateModified: json['dateModified']??'',
-    );
+ static Meal fromJson(Map<String, dynamic> json) {
+  List<String> ingredients = [];
+  List<String> measures = [];
+
+  for (int i = 1; i <= 20; i++) {
+    final ingredient = json['strIngredient$i'];
+    final measure = json['strMeasure$i'];
+
+    if (ingredient != null && ingredient.isNotEmpty) {
+      ingredients.add(ingredient);
+      measures.add(measure ?? '');
+    }
   }
-} 
+
+  return Meal(
+    idMeal: json['idMeal'] ?? '',
+    strMeal: json['strMeal'] ?? '',
+    strDrinkAlternate: json['strDrinkAlternate'] ?? '',
+    strCategory: json['strCategory'] ?? '',
+    strArea: json['strArea'] ?? '',
+    strInstructions: json['strInstructions'] ?? '',
+    strMealThumb: json['strMealThumb'] ?? '',
+    strTags: json['strTags'] ?? '',
+    strYoutube: json['strYoutube'] ?? '',
+    strSource: json['strSource'] ?? '',
+    strImageSource: json['strImageSource'] ?? '',
+    strCreativeCommonsConfirmed: json['strCreativeCommonsConfirmed'] ?? '',
+    dateModified: json['dateModified'] ?? '',
+    ingredients: ingredients,
+    measures: measures,
+  );
+}
+}
