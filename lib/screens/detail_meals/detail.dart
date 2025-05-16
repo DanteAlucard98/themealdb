@@ -132,24 +132,8 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
     }
   }
 
-  // Helper method to extract YouTube video ID from the URL
-  String? _getYoutubeVideoId(String url) {
-    if (url.isEmpty) return null;
-    
-    RegExp regExp = RegExp(
-      r'^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*',
-      caseSensitive: false,
-      multiLine: false,
-    );
-    
-    Match? match = regExp.firstMatch(url);
-    return (match != null && match.groupCount >= 7) ? match.group(7) : null;
-  }
-
   @override
   Widget build(BuildContext context) {
-    // Get YouTube video ID
-    final videoId = _getYoutubeVideoId(widget.meal.strYoutube);
 
     return Scaffold(
       body: Stack(
