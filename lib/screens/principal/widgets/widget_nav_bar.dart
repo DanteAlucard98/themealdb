@@ -1,5 +1,6 @@
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:recetas_adpp_2025/main.dart';
 
 
 class WidgetNavBar extends StatelessWidget {
@@ -22,7 +23,18 @@ class WidgetNavBar extends StatelessWidget {
         onTap: (index) {
           pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
         },
-        color: Colors.blue.withAlpha(200),
+        color: AppColors.primary,
+        height: 60,
+        circleWidth: 60,
+        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 20),
+        cornerRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        shadowColor: Colors.black.withOpacity(0.2),
+        elevation: 8,
+        circleColor: AppColors.secondary,
+        circleShadowColor: Colors.black.withOpacity(0.2),
     );
   }
 }

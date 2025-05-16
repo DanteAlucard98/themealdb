@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recetas_adpp_2025/main.dart';
 
 class SearchMealsScreen extends StatelessWidget {
   const SearchMealsScreen({super.key});
@@ -8,6 +9,7 @@ class SearchMealsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: searchmeals(),
     );
   }
@@ -27,7 +29,7 @@ class searchmeals extends StatelessWidget {
           width: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue, Colors.blue.withAlpha(400)],
+              colors: [AppColors.primary, AppColors.secondary],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -48,14 +50,32 @@ class searchmeals extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search for meals...',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
+        Expanded(
+          child: Container(
+            color: AppColors.background,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Search for meals...',
+                  hintStyle: TextStyle(color: AppColors.textPrimary.withOpacity(0.6)),
+                  prefixIcon: Icon(Icons.search, color: AppColors.primary),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  filled: true,
+                  fillColor: AppColors.cardBackground,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: AppColors.primary, width: 2),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    borderSide: BorderSide(color: AppColors.secondary.withOpacity(0.5)),
+                  ),
+                ),
+                style: TextStyle(color: AppColors.textPrimary),
+                cursorColor: AppColors.primary,
               ),
             ),
           ),

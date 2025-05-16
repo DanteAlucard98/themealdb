@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/specific_meal/bloc/specific_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/specific_meal/bloc/specific_event.dart';
 import 'package:recetas_adpp_2025/domain/entities/meal.dart';
+import 'package:recetas_adpp_2025/main.dart';
 
 class DetailMealsScreen extends StatelessWidget {
   const DetailMealsScreen({super.key, required this.mealId});
@@ -16,18 +17,71 @@ class DetailMealsScreen extends StatelessWidget {
     specificBloc.add(FetchMealById(mealId));
 
     return Scaffold(
-      appBar: AppBar(title: Text('Meal Details')),
+      extendBodyBehindAppBar: true,
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: Container(
+          margin: const EdgeInsets.only(left: 16, top: 8),
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       body: BlocBuilder<SpecificBloc, SpecificState>(
         builder: (context, state) {
           if (state.status == SpecificStatus.loading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+              ),
+            );
           } else if (state.status == SpecificStatus.success) {
             final meal = state.meal!;
-            return detailmeals(meal: meal);
+            return DetailMealsContent(meal: meal);
           } else if (state.status == SpecificStatus.failure) {
-            return Center(child: Text('Error: ${state.errorMessage}'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.error_outline, size: 60, color: AppColors.secondary),
+                  const SizedBox(height: 16),
+                  Text(
+                    'Error: ${state.errorMessage}',
+                    style: TextStyle(fontSize: 18, color: AppColors.textPrimary),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            );
           } else {
-            return Center(child: Text('No data found'));
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.search_off, size: 60, color: AppColors.secondary),
+                  const SizedBox(height: 16),
+                  Text(
+                    'No data found',
+                    style: TextStyle(fontSize: 18, color: AppColors.textPrimary),
+                  ),
+                ],
+              ),
+            );
           }
         },
       ),
@@ -35,47 +89,331 @@ class DetailMealsScreen extends StatelessWidget {
   }
 }
 
-class detailmeals extends StatelessWidget {
+class DetailMealsContent extends StatefulWidget {
   final Meal meal;
-  const detailmeals({
+  
+  const DetailMealsContent({
     super.key,
     required this.meal,
   });
 
   @override
+  State<DetailMealsContent> createState() => _DetailMealsContentState();
+}
+
+class _DetailMealsContentState extends State<DetailMealsContent> {
+  static const double maxHeaderHeight = 300;
+  static const double minHeaderHeight = 120;
+
+  final ScrollController _scrollController = ScrollController();
+  double _headerHeight = maxHeaderHeight;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    final offset = _scrollController.offset;
+    final newHeight = (maxHeaderHeight - offset).clamp(minHeaderHeight, maxHeaderHeight);
+    
+    if (newHeight != _headerHeight) {
+      setState(() {
+        _headerHeight = newHeight;
+      });
+    }
+  }
+
+  // Helper method to extract YouTube video ID from the URL
+  String? _getYoutubeVideoId(String url) {
+    if (url.isEmpty) return null;
+    
+    RegExp regExp = RegExp(
+      r'^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*',
+      caseSensitive: false,
+      multiLine: false,
+    );
+    
+    Match? match = regExp.firstMatch(url);
+    return (match != null && match.groupCount >= 7) ? match.group(7) : null;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    // Get YouTube video ID
+    final videoId = _getYoutubeVideoId(widget.meal.strYoutube);
+
+    return Scaffold(
+      body: Stack(
         children: [
-          Image.network(meal.strMealThumb, fit: BoxFit.cover, width: double.infinity),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Category: ${meal.strCategory}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          // Animated header image
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              height: _headerHeight,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Hero(
+                    tag: widget.meal.idMeal,
+                    child: Image.network(
+                      widget.meal.strMealThumb,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Colors.black.withOpacity(0.8),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+                      child: Text(
+                        widget.meal.strMeal,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 2.0,
+                              color: Colors.black,
+                              offset: Offset(1.0, 1.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Area: ${meal.strArea}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          
+          // Scrollable content
+          Positioned.fill(
+            top: _headerHeight - 20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Basic info chips
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Wrap(
+                          spacing: 8,
+                          children: [
+                            Chip(
+                              avatar: const Icon(Icons.category, size: 18, color: Colors.white),
+                              label: Text(widget.meal.strCategory, style: const TextStyle(color: Colors.white)),
+                              backgroundColor: AppColors.primary,
+                            ),
+                            Chip(
+                              avatar: const Icon(Icons.public, size: 18, color: Colors.white),
+                              label: Text(widget.meal.strArea, style: const TextStyle(color: Colors.white)),
+                              backgroundColor: AppColors.secondary,
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      // Ingredients section - expandable
+                      ExpandableCard(
+                        title: 'Ingredients',
+                        icon: Icons.restaurant,
+                        iconColor: AppColors.primary,
+                        gradientColors: [
+                          AppColors.primary.withOpacity(0.15),
+                          AppColors.secondary.withOpacity(0.05),
+                        ],
+                        gradientBegin: Alignment.topLeft,
+                        gradientEnd: Alignment.bottomRight,
+                        children: List.generate(widget.meal.ingredients.length, (index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 6.0),
+                            child: Row(
+                              children: [
+                                Icon(Icons.fiber_manual_record, size: 12, color: AppColors.secondary),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    widget.meal.ingredients[index],
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.textPrimary,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  widget.meal.measures[index],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: AppColors.textPrimary.withOpacity(0.7),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
+                      ),
+                      
+                      // Instructions section - expandable
+                      ExpandableCard(
+                        title: 'Instructions',
+                        icon: Icons.menu_book,
+                        iconColor: AppColors.secondary,
+                        gradientColors: [
+                          AppColors.secondary.withOpacity(0.15),
+                          AppColors.primary.withOpacity(0.05),
+                        ],
+                        gradientBegin: Alignment.topLeft,
+                        gradientEnd: Alignment.bottomRight,
+                        children: [
+                          Text(
+                            widget.meal.strInstructions,
+                            style: TextStyle(
+                              fontSize: 16,
+                              height: 1.5,
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      
+                      const SizedBox(height: 24),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Instructions:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(meal.strInstructions),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text('Ingredients:', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-          ),
-          ...List.generate(meal.ingredients.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-              child: Text('${meal.ingredients[index]} - ${meal.measures[index]}'),
-            );
-          }),
         ],
+      ),
+    );
+  }
+}
+
+class ExpandableCard extends StatefulWidget {
+  final String title;
+  final IconData icon;
+  final Color iconColor;
+  final List<Widget> children;
+  final List<Color> gradientColors;
+  final AlignmentGeometry gradientBegin;
+  final AlignmentGeometry gradientEnd;
+
+  const ExpandableCard({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.iconColor,
+    required this.children,
+    required this.gradientColors,
+    required this.gradientBegin,
+    required this.gradientEnd,
+  }) : super(key: key);
+
+  @override
+  State<ExpandableCard> createState() => _ExpandableCardState();
+}
+
+class _ExpandableCardState extends State<ExpandableCard> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: widget.gradientBegin,
+          end: widget.gradientEnd,
+          colors: widget.gradientColors,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+              child: Row(
+                children: [
+                  Icon(widget.icon, color: widget.iconColor),
+                  const SizedBox(width: 8),
+                  Text(
+                    widget.title,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const Spacer(),
+                  Icon(
+                    _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    color: AppColors.textPrimary.withOpacity(0.6),
+                  ),
+                ],
+              ),
+            ),
+            if (_isExpanded) ...[
+              const SizedBox(height: 8),
+              ...widget.children,
+            ],
+          ],
+        ),
       ),
     );
   }

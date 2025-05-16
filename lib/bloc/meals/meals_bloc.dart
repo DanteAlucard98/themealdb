@@ -27,14 +27,13 @@ class MealsBloc extends Bloc<MealsEvent, MealsState> {
         status: MealsStatus.loading,
         currentLetter: event.letter,
         alphabet: event.letter.codeUnitAt(0) - 'a'.codeUnitAt(0),
-        meals: [], // se resetea la lista de comidas
+        meals: [], 
         currentPage: 1,
         hasReachedMax: false,
       ));
 
       final meals = await _listDatasource.getListMeals(event.letter);
 
-      // Si no hay comidas, marcamos que hemos alcanzado el máximo
       final hasReachedMax = meals.isEmpty;
 
       emit(state.copyWith(

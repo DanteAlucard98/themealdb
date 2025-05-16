@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recetas_adpp_2025/main.dart';
 import 'package:recetas_adpp_2025/screens/principal/widgets/widget_nav_bar.dart';
 import 'package:recetas_adpp_2025/screens/screens.dart';
 
@@ -20,7 +21,8 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:PageView(
+      backgroundColor: AppColors.background,
+      body: PageView(
         controller: _pageController,
         children: _pages,
         onPageChanged: (index) {

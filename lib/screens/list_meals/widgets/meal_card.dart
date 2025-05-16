@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recetas_adpp_2025/main.dart';
 
-Widget buildMealCard(String id,String title, String? image, BuildContext context) {
+Widget buildMealCard(String id, String title, String? image, BuildContext context) {
   return InkWell(
     onTap: () {
       context.goNamed('detail-meals-screen',
@@ -16,6 +17,7 @@ Widget buildMealCard(String id,String title, String? image, BuildContext context
         borderRadius: BorderRadius.circular(15.0),
       ),
       elevation: 5, 
+      color: AppColors.cardBackground,
       child: SizedBox(
         height: 180.0.h,
         child: Column(
@@ -33,11 +35,11 @@ Widget buildMealCard(String id,String title, String? image, BuildContext context
                 : Container(
                     width: double.infinity,
                     height: 120.0.h,
-                    color: Colors.blue.withAlpha(50),
+                    color: AppColors.primary.withOpacity(0.1),
                     child: Icon(
                       Icons.fastfood,
                       size: 60.0.w,
-                      color: Colors.blue.withAlpha(200),
+                      color: AppColors.primary,
                     ),
                   ),
             ),
@@ -48,9 +50,10 @@ Widget buildMealCard(String id,String title, String? image, BuildContext context
                 style: GoogleFonts.montserrat(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
                 ),
                 textAlign: TextAlign.center,
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
