@@ -132,16 +132,17 @@ class _searchmealsState extends State<searchmeals> {
                               valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                             ),
                           );
-                        } else if (state.status == SearchMealStatus.success && state.searchMeal != null) {
-                          final meal = state.searchMeal!;
-                          return MealSearch(meal: meal);
+                        } else if (state.status == SearchMealStatus.success && state.searchMeals.isNotEmpty) {
+                          final meals = state.searchMeals;
+                          return MealSearch(meals: meals);
                         } else if (state.status == SearchMealStatus.failure) {
                           return Center(
                             child: Text(
-                              'Error: ${state.errorMessage}',
+                              'Error: Unable to connect. Please check your internet connection and try again.',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: Colors.red,
                                 fontSize: 16.sp,
+                                color: AppColors.textPrimary,
                               ),
                             ),
                           );

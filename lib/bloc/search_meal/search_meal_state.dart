@@ -1,29 +1,28 @@
+// search_meal_state.dart
 part of 'search_meal_bloc.dart';
+
 enum SearchMealStatus { initial, loading, success, failure }
 
 class SearchMealState {
   final SearchMealStatus status;
-  final Meal? searchMeal; //comidas encontrada
+  final List<Meal> searchMeals; // Change to a list of meals
   final String errorMessage;
-  final String idMeal; //id de la comida
+
   SearchMealState({
     this.status = SearchMealStatus.initial,
-    this.searchMeal,
+    this.searchMeals = const [], // Initialize as an empty list
     this.errorMessage = '',
-    this.idMeal = '',
   });
 
   SearchMealState copyWith({
     SearchMealStatus? status,
-    Meal? searchMeal,
-    String ? idMeal,
+    List<Meal>? searchMeals,
     String? errorMessage,
   }) {
     return SearchMealState(
       status: status ?? this.status,
-      searchMeal: searchMeal ?? this.searchMeal,
+      searchMeals: searchMeals ?? this.searchMeals,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 }
-
