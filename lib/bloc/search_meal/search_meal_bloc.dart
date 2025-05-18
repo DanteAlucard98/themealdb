@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:recetas_adpp_2025/domain/entities/search_meal.dart';
+import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 import 'package:recetas_adpp_2025/infraestructure/datasources/search_meal_datasources.dart';
 
 part 'search_meal_event.dart';

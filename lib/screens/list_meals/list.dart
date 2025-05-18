@@ -18,24 +18,28 @@ class ListMealsScreen extends StatefulWidget {
 class _ListMealsScreenState extends State<ListMealsScreen> {
   final _scrollController = ScrollController();
 
+  //Función para inicializar el scroll controller
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
   }
 
+  //Función para liberar el scroll controller
   @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
 
+  //Función para cargar más comidas
   void _onScroll() {
     if (_isBottom) {
       context.read<MealsBloc>().add(LoadMoreMeals());
     }
   }
 
+  //Función para verificar si estamos al final de la lista
   bool get _isBottom {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;

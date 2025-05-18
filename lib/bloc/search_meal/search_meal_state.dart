@@ -3,7 +3,7 @@ enum SearchMealStatus { initial, loading, success, failure }
 
 class SearchMealState {
   final SearchMealStatus status;
-  final SearchMeal? searchMeal; //comidas encontrada
+  final Meal? searchMeal; //comidas encontrada
   final String errorMessage;
   final String idMeal; //id de la comida
   SearchMealState({
@@ -15,7 +15,7 @@ class SearchMealState {
 
   SearchMealState copyWith({
     SearchMealStatus? status,
-    SearchMeal? searchMeal,
+    Meal? searchMeal,
     String ? idMeal,
     String? errorMessage,
   }) {

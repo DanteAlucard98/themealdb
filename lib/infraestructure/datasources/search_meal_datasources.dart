@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:recetas_adpp_2025/constants/enviroment.dart';
-import 'package:recetas_adpp_2025/domain/entities/search_meal.dart';
-import 'package:recetas_adpp_2025/infraestructure/mappers/search_meal_mapper.dart';
+import 'package:recetas_adpp_2025/domain/entities/meal.dart';
+import 'package:recetas_adpp_2025/infraestructure/mappers/meal_mapper.dart';
 import 'package:recetas_adpp_2025/infraestructure/models/list_model.dart';
 
 //Clase para obtener la comida encontrada
@@ -10,13 +10,13 @@ class SearchMealDatasource {
   SearchMealDatasource() : dio = Dio(BaseOptions(baseUrl: Environment.urlBase));
 
   //Método para obtener la comida encontrada
-  Future<SearchMeal> getSearchMeal(String namePlate) async {
+  Future<Meal> getSearchMeal(String namePlate) async {
     try {
       final response = await dio.get('search.php?s=$namePlate');
       final purpleList = PurpleList.fromJson(response.data);
       
       if (purpleList.meals.isNotEmpty) {
-        return SearchMealMapper.fromJson(purpleList.meals.first);
+        return MealMapper.fromJson(purpleList.meals.first);
       } else {
         throw Exception('No meal found with the given ID');
       }

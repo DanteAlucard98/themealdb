@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:recetas_adpp_2025/domain/entities/search_meal.dart';
+import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 import 'package:recetas_adpp_2025/main.dart';
 import 'package:go_router/go_router.dart';
 
 //Clase para obtener la comida encontrada
 class MealSearch extends StatelessWidget {
-  final SearchMeal meal;
+  final Meal meal;
   const MealSearch({super.key, required this.meal});
 
   @override
