@@ -12,7 +12,7 @@ class DetailMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Access the BLoC from the provider
+    //Accede al BLoC desde el provider
     final specificBloc = context.read<SpecificBloc>();
     specificBloc.add(FetchMealById(mealId));
 
@@ -42,6 +42,7 @@ class DetailMealsScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
       ),
+      //Bloc para obtener la comida específica
       body: BlocBuilder<SpecificBloc, SpecificState>(
         builder: (context, state) {
           if (state.status == SpecificStatus.loading) {
@@ -88,7 +89,7 @@ class DetailMealsScreen extends StatelessWidget {
     );
   }
 }
-
+//Clase para obtener el contenido de la comida específica
 class DetailMealsContent extends StatefulWidget {
   final Meal meal;
   
@@ -138,7 +139,7 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
     return Scaffold(
       body: Stack(
         children: [
-          // Animated header image
+          //Imagen animada del header
           Positioned(
             top: 0,
             left: 0,
@@ -194,7 +195,7 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
             ),
           ),
           
-          // Scrollable content
+          // Contenido scrollable
           Positioned.fill(
             top: _headerHeight - 20,
             child: Container(
@@ -217,7 +218,7 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Basic info chips
+                      //Información básica de la comida
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Wrap(
@@ -237,7 +238,7 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
                         ),
                       ),
                       
-                      // Ingredients section - expandable
+                        // Ingredients section - expandible
                       ExpandableCard(
                         title: 'Ingredients',
                         icon: Icons.restaurant,
@@ -278,7 +279,7 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
                         }),
                       ),
                       
-                      // Instructions section - expandable
+                      // Instrucciones sección - expandible
                       ExpandableCard(
                         title: 'Instructions',
                         icon: Icons.menu_book,

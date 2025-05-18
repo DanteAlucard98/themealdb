@@ -3,9 +3,9 @@ enum SearchMealStatus { initial, loading, success, failure }
 
 class SearchMealState {
   final SearchMealStatus status;
-  final SearchMeal? searchMeal;
+  final SearchMeal? searchMeal; //comidas encontrada
   final String errorMessage;
-  final String idMeal;
+  final String idMeal; //id de la comida
   SearchMealState({
     this.status = SearchMealStatus.initial,
     this.searchMeal,

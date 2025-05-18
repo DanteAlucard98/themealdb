@@ -1,3 +1,4 @@
+//Clase para la comida encontrada
 class SearchMeal {
   final String idMeal;
   final String strMeal;

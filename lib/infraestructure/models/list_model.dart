@@ -1,3 +1,4 @@
+//Clase para obtener la informacion de json a dart 
 class PurpleList {
     final List<Map<String, String?>> meals;
 

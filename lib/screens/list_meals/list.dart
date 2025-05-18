@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_barrel.dart';
+import 'package:recetas_adpp_2025/general_widgets/title_function.dart';
 import 'package:recetas_adpp_2025/main.dart';
 import 'package:recetas_adpp_2025/screens/list_meals/widgets/meal_card.dart';
 
@@ -78,7 +79,8 @@ class ListMealContent extends StatelessWidget {
           child: Center(
             heightFactor: 100.h,
             child: Text(
-              'list of meals',
+              //Convierte el texto a title case
+              titleCase('list of meals'),
               style: GoogleFonts.montserrat(
                 color: Colors.white,
                 fontSize: 20.sp,

@@ -4,10 +4,12 @@ import 'package:recetas_adpp_2025/domain/entities/search_meal.dart';
 import 'package:recetas_adpp_2025/infraestructure/mappers/search_meal_mapper.dart';
 import 'package:recetas_adpp_2025/infraestructure/models/list_model.dart';
 
+//Clase para obtener la comida encontrada
 class SearchMealDatasource {
   final Dio dio;
   SearchMealDatasource() : dio = Dio(BaseOptions(baseUrl: Environment.urlBase));
 
+  //Método para obtener la comida encontrada
   Future<SearchMeal> getSearchMeal(String namePlate) async {
     try {
       final response = await dio.get('search.php?s=$namePlate');

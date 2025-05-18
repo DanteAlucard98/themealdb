@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_event.dart';
 import 'package:recetas_adpp_2025/bloc/meals/meals_state.dart';
 import 'package:recetas_adpp_2025/infraestructure/datasources/list_meal_datasources.dart';
-
+//Bloc para la lista de comidas
 class MealsBloc extends Bloc<MealsEvent, MealsState> {
   final ListDatasource _listDatasource;
   final _totalLetters = 26; // De 'a' a 'z'

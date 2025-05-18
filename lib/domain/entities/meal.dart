@@ -1,3 +1,4 @@
+//Clase para la comida específica
 class Meal {
   final String idMeal;
   final String strMeal;

@@ -13,7 +13,7 @@ class MealsState {
 
   MealsState({
     this.status = MealsStatus.initial,
-    this.meals = const [],
+    this.meals = const [], //lista de comidas
     this.errorMessage = '',
     this.currentLetter = 'a', // Por defecto comienza con la letra 'a'
     this.hasReachedMax = false,

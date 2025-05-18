@@ -1,3 +1,4 @@
+//Clase para la lista de comidas
 class ListMeal {
   final String idMeal;
   final String strMeal;

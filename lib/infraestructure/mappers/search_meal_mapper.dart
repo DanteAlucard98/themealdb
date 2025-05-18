@@ -1,5 +1,6 @@
 import 'package:recetas_adpp_2025/domain/entities/search_meal.dart';
 
+//Clase para obtener la comida encontrada
 class SearchMealMapper {
  static SearchMeal fromJson(Map<String, dynamic> json) {
   List<String> ingredients = [];

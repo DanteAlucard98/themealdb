@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recetas_adpp_2025/main.dart';
 
+
+//Clase para obtener la tarjeta de la comida
 Widget buildMealCard(String id, String title, String? image, BuildContext context) {
   return InkWell(
     onTap: () {
@@ -11,6 +13,7 @@ Widget buildMealCard(String id, String title, String? image, BuildContext contex
        pathParameters: {'mealId': id},
       );
     },
+    //Tarjeta de la comida
     child: Card(
       margin: EdgeInsets.symmetric(vertical: 8.0),
       shape: RoundedRectangleBorder(
@@ -23,6 +26,7 @@ Widget buildMealCard(String id, String title, String? image, BuildContext contex
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            //Imagen de la comida
             ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)), 
               child: image != null
@@ -43,6 +47,7 @@ Widget buildMealCard(String id, String title, String? image, BuildContext contex
                     ),
                   ),
             ),
+            //Título de la comida
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
@@ -63,3 +68,4 @@ Widget buildMealCard(String id, String title, String? image, BuildContext contex
     ),
   );
 }
+

@@ -4,10 +4,12 @@ import 'package:recetas_adpp_2025/domain/entities/list_meal.dart';
 import 'package:recetas_adpp_2025/infraestructure/mappers/list_meal_mapper.dart';
 import 'package:recetas_adpp_2025/infraestructure/models/list_model.dart';
 
+//Clase para obtener la lista de comidas
 class ListDatasource {
   final Dio dio;
   ListDatasource() : dio = Dio(BaseOptions(baseUrl: Environment.urlBase));
 
+  //Método para obtener la lista de comidas
   Future<List<ListMeal>> getListMeals(String letra) async {
     try {
       final response = await dio.get('search.php?f=$letra');

@@ -1,5 +1,6 @@
 import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 
+//Clase para obtener la comida específica
 class MealMapper {
  static Meal fromJson(Map<String, dynamic> json) {
   List<String> ingredients = [];

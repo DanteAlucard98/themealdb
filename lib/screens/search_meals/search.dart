@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recetas_adpp_2025/bloc/search_meal/search_meal_bloc.dart';
+import 'package:recetas_adpp_2025/general_widgets/title_function.dart';
 import 'package:recetas_adpp_2025/main.dart';
 import 'package:recetas_adpp_2025/screens/detail_meals/widgets/meal_search.dart';
 
@@ -55,7 +56,7 @@ class _searchmealsState extends State<searchmeals> {
           child: Center(
             heightFactor: 100.h,
             child: Text(
-              'search meals',
+              titleCase('search meals'),
               style: GoogleFonts.montserrat(
                 color: Colors.white,
                 fontSize: 20.sp,

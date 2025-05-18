@@ -10,10 +10,10 @@ class SearchMealBloc extends Bloc<SearchMealEvent, SearchMealState> {
   SearchMealBloc({required SearchMealDatasource searchMealDatasource}) : _searchMealDatasource = searchMealDatasource, super(SearchMealState()) {
     on<FetchSearchMeal>(_onFetchSearchMeal);
   }
-
+  //Bloc para buscar comida
   Future<void> _onFetchSearchMeal(FetchSearchMeal event, Emitter<SearchMealState> emit) async {
     try {
-      
+      //Cambia el estado a loading y resetea la comida encontrada
       emit(state.copyWith(status: SearchMealStatus.loading, searchMeal: null));
       final searchMeal = await _searchMealDatasource.getSearchMeal(event.namePlate);
       emit(state.copyWith(status: SearchMealStatus.success, searchMeal: searchMeal));

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../screens/screens.dart';
 
-/// Custom transition for pages
+//Función para la transición de las páginas
 CustomTransitionPage<void> buildPageWithDefaultTransition({
   required BuildContext context, 
   required GoRouterState state, 

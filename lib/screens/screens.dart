@@ -1,3 +1,4 @@
+//Exporta las pantallas
 export 'principal/principal.dart';
 export 'detail_meals/detail.dart';
 export 'list_meals/list.dart';

@@ -11,6 +11,7 @@ class PrincipalScreen extends StatefulWidget {
   State<PrincipalScreen> createState() => _PrincipalScreenState();
 }
 
+//Clase para obtener la pantalla principal
 class _PrincipalScreenState extends State<PrincipalScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentIndex = 0;
@@ -22,6 +23,7 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
+      //Contenedor de la pantalla principal
       body: PageView(
         controller: _pageController,
         children: _pages,
@@ -31,6 +33,7 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
           });
         },
       ),
+      //Barra de navegación
       bottomNavigationBar: WidgetNavBar(
         pageController: _pageController,
         currentIndex: _currentIndex,
@@ -39,19 +42,3 @@ class _PrincipalScreenState extends State<PrincipalScreen> {
   }
 }
 
-class principalScreen extends StatelessWidget {
-  const principalScreen({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    
-
-    return Column(
-      children: [
-        Text('Principal'),
-      ],
-    );
-  }
-}

@@ -19,16 +19,19 @@ class AppProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        //Bloc para la lista de comidas
         BlocProvider(
           create: (context) => MealsBloc(
             listDatasource: ListDatasource(),
           ),
         ),
+        //Bloc para la comida específica
         BlocProvider(
           create: (context) => SpecificBloc(
             mealDatasource: MealDatasource(),
           ),
         ),
+        //Bloc para buscar comida
         BlocProvider(
           create: (context) => SearchMealBloc(
             searchMealDatasource: SearchMealDatasource(),

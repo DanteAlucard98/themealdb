@@ -4,10 +4,12 @@ import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 import 'package:recetas_adpp_2025/infraestructure/mappers/meal_mapper.dart';
 import 'package:recetas_adpp_2025/infraestructure/models/list_model.dart';
 
+//Clase para obtener la comida específica
 class MealDatasource {
   final Dio dio;
   MealDatasource() : dio = Dio(BaseOptions(baseUrl: Environment.urlBase));
 
+  //Método para obtener la comida específica
   Future<Meal> getMeal(String id) async {
     try {
       final response = await dio.get('lookup.php?i=$id');

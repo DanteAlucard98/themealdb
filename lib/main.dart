@@ -28,18 +28,21 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  //Clase para obtener el root de la aplicación
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
+      //Carga los providers
       builder: (context, child) => AppProviders(
         child: ResponsiveBreakpoints.builder(
+          //Carga la aplicación
           child: MaterialApp.router(
             routerConfig: appRouter,
             debugShowCheckedModeBanner: false,
+            //Tema de la aplicación
             theme: ThemeData(
               primaryColor: AppColors.primary,
               scaffoldBackgroundColor: AppColors.background,
@@ -51,6 +54,7 @@ class MyApp extends StatelessWidget {
                 background: AppColors.background,
                 surface: AppColors.cardBackground,
               ),
+              //Tema de la tarjeta
               cardTheme: CardTheme(
                 color: AppColors.cardBackground,
                 elevation: 3,
@@ -58,16 +62,19 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+              //Tema de la barra de navegación
               appBarTheme: AppBarTheme(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
               ),
+              //Tema de los textos
               textTheme: TextTheme(
                 bodyLarge: TextStyle(color: AppColors.textPrimary),
                 bodyMedium: TextStyle(color: AppColors.textPrimary),
                 titleLarge: TextStyle(color: AppColors.textPrimary),
               ),
+              //Tema de los inputs
               inputDecorationTheme: InputDecorationTheme(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -80,6 +87,7 @@ class MyApp extends StatelessWidget {
                 filled: true,
                 fillColor: AppColors.cardBackground,
               ),
+              //Tema de las transiciones
               pageTransitionsTheme: const PageTransitionsTheme(
                 builders: {
                   TargetPlatform.android: ZoomPageTransitionsBuilder(),
@@ -91,6 +99,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+          //Breakpoints de la aplicación (Se acomode dependiendo del dispositivo)
           breakpoints: [
             const Breakpoint(start: 0, end: 450, name: MOBILE),
             const Breakpoint(start: 451, end: 800, name: TABLET),
