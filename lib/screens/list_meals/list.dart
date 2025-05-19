@@ -113,7 +113,7 @@ class ListMealContent extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Error: ${state.errorMessage}',
+                            '${state.errorMessage}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 16.sp,

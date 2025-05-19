@@ -11,4 +11,7 @@ class GetMealsByLetter extends MealsEvent {
 class LoadMoreMeals extends MealsEvent {}
 
 // Evento para avanzar a la siguiente letra del alfabeto
-class NextLetterMeals extends MealsEvent {} 
+class NextLetterMeals extends MealsEvent {}
+
+// Evento para cargar la última lista guardada
+class LoadLastListMeals extends MealsEvent {} 

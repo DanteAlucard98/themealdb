@@ -5,3 +5,6 @@ class FetchMealById extends SpecificEvent {
 
   FetchMealById(this.mealId);
 }
+
+// Evento para cargar los últimos detalles guardados
+class LoadLastMealDetails extends SpecificEvent {}

@@ -8,3 +8,6 @@ class FetchSearchMeal extends SearchMealEvent {
 
   FetchSearchMeal(this.namePlate);
 }
+
+// Evento para cargar los últimos resultados guardados
+class LoadLastSearchResults extends SearchMealEvent {}

@@ -62,7 +62,7 @@ class DetailMealsScreen extends StatelessWidget {
                   Icon(Icons.error_outline, size: 60, color: AppColors.secondary),
                   const SizedBox(height: 16),
                   Text(
-                    'Error: ${state.errorMessage}',
+                    '${state.errorMessage}',
                     style: TextStyle(fontSize: 18, color: AppColors.textPrimary),
                     textAlign: TextAlign.center,
                   ),

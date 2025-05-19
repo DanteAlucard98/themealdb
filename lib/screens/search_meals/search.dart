@@ -7,6 +7,7 @@ import 'package:recetas_adpp_2025/general_widgets/title_function.dart';
 import 'package:recetas_adpp_2025/main.dart';
 import 'package:recetas_adpp_2025/screens/detail_meals/widgets/meal_search.dart';
 
+// Pantalla principal de búsqueda
 class SearchMealsScreen extends StatelessWidget {
   const SearchMealsScreen({super.key});
   static const name = 'search-meals-screen';
@@ -19,6 +20,7 @@ class SearchMealsScreen extends StatelessWidget {
   }
 }
 
+// Widget para la funcionalidad de búsqueda
 class searchmeals extends StatefulWidget {
   const searchmeals({super.key});
 
@@ -27,6 +29,7 @@ class searchmeals extends StatefulWidget {
 }
 
 class _searchmealsState extends State<searchmeals> {
+  // Controlador para el campo de búsqueda
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -39,6 +42,7 @@ class _searchmealsState extends State<searchmeals> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // Encabezado con gradiente
         Container(
           height: 100.h,
           width: double.infinity,
@@ -65,6 +69,7 @@ class _searchmealsState extends State<searchmeals> {
             ),
           ),
         ),
+        // Contenido principal
         Expanded(
           child: Container(
             color: AppColors.background,
@@ -72,6 +77,7 @@ class _searchmealsState extends State<searchmeals> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  // Campo de búsqueda
                   TextField(
                     controller: _searchController,
                     decoration: InputDecoration(
@@ -113,32 +119,52 @@ class _searchmealsState extends State<searchmeals> {
                     },
                   ),
                   SizedBox(height: 20),
+                  // Resultados de la búsqueda
                   Expanded(
                     child: BlocBuilder<SearchMealBloc, SearchMealState>(
                       builder: (context, state) {
+                        // Estado inicial
                         if (state.status == SearchMealStatus.initial) {
                           return Center(
-                            child: Text(
-                              'Search for your favorite meals!',
-                              style: TextStyle(
-                                color: AppColors.textPrimary,
-                                fontSize: 16.sp,
-                              ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.search,
+                                  size: 60,
+                                  color: AppColors.secondary.withOpacity(0.5),
+                                ),
+                                const SizedBox(height: 16),
+                                Text(
+                                  'Search for your favorite meals!',
+                                  style: TextStyle(
+                                    color: AppColors.textPrimary,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
                           );
-                        } else if (state.status == SearchMealStatus.loading) {
+                        } 
+                        // Estado de carga
+                        else if (state.status == SearchMealStatus.loading) {
                           return Center(
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                             ),
                           );
-                        } else if (state.status == SearchMealStatus.success && state.searchMeals.isNotEmpty) {
+                        } 
+                        // Estado de éxito con resultados
+                        else if (state.status == SearchMealStatus.success && state.searchMeals.isNotEmpty) {
                           final meals = state.searchMeals;
                           return MealSearch(meals: meals);
-                        } else if (state.status == SearchMealStatus.failure) {
+                        } 
+                        // Estado de error
+                        else if (state.status == SearchMealStatus.failure) {
                           return Center(
                             child: Text(
-                              'Error: Unable to connect. Please check your internet connection and try again.',
+                              'Unable to connect. Please check your internet connection and try again.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16.sp,
@@ -146,7 +172,9 @@ class _searchmealsState extends State<searchmeals> {
                               ),
                             ),
                           );
-                        } else {
+                        } 
+                        // Estado por defecto
+                        else {
                           return Container();
                         }
                       },

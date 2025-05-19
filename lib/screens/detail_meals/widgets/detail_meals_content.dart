@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recetas_adpp_2025/domain/entities/meal.dart';
 import 'package:recetas_adpp_2025/main.dart';
 import 'package:recetas_adpp_2025/screens/detail_meals/widgets/expandable_card.dart';
+import 'package:recetas_adpp_2025/general_widgets/network_image_with_fallback.dart';
 
 //Clase para obtener el contenido de la comida específica
 class DetailMealsContent extends StatefulWidget {
@@ -66,8 +67,8 @@ class _DetailMealsContentState extends State<DetailMealsContent> {
                 children: [
                   Hero(
                     tag: widget.meal.idMeal,
-                    child: Image.network(
-                      widget.meal.strMealThumb,
+                    child: NetworkImageWithFallback(
+                      imageUrl: widget.meal.strMealThumb,
                       fit: BoxFit.cover,
                     ),
                   ),

@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   circle_nav_bar: ^2.2.0
+  connectivity_plus: ^5.0.2
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   flutter:
@@ -62,6 +63,7 @@ flutter:
   assets:
     - .env
     - .env.template
+    - assets/images/no-image-icon-23494.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   # For details regarding adding assets from package dependencies, see
