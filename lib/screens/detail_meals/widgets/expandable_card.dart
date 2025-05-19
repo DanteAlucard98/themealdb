@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recetas_adpp_2025/main.dart';
 
-
+//Tarjeta expandible
 class ExpandableCard extends StatefulWidget {
   final String title;
   final IconData icon;
@@ -11,6 +11,7 @@ class ExpandableCard extends StatefulWidget {
   final AlignmentGeometry gradientBegin;
   final AlignmentGeometry gradientEnd;
 
+  //Constructor de la tarjeta expandible
   const ExpandableCard({
     Key? key,
     required this.title,
@@ -22,13 +23,16 @@ class ExpandableCard extends StatefulWidget {
     required this.gradientEnd,
   }) : super(key: key);
 
+  //Crear el estado de la tarjeta expandible
   @override
   State<ExpandableCard> createState() => _ExpandableCardState();
 }
 
+//Estado de la tarjeta expandible
 class _ExpandableCardState extends State<ExpandableCard> {
   bool _isExpanded = false;
 
+  //Construir el widget de la tarjeta expandible
   @override
   Widget build(BuildContext context) {
     return Container(

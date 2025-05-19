@@ -58,7 +58,7 @@ class FavoriteMealsScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          state.errorMessage ?? 'Error al cargar favoritos',
+                          state.errorMessage,
                           style: TextStyle(
                             color: AppColors.textPrimary,
                             fontSize: 16.sp,

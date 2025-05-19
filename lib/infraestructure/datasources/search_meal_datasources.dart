@@ -9,7 +9,7 @@ class SearchMealDatasource {
   final Dio dio;
   SearchMealDatasource() : dio = Dio(BaseOptions(baseUrl: Environment.urlBase));
 
-  // Method to fetch meals based on search query
+  // Método para obtener las comidas basadas en la búsqueda
   Future<List<Meal>> getSearchMeal(String namePlate) async {
     try {
       final response = await dio.get('search.php?s=$namePlate');

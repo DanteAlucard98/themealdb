@@ -56,6 +56,7 @@ class AppProviders extends StatelessWidget {
             BlocProvider(
               create: (context) => FavoriteMealsBloc(
                 mealDatasource: MealDatasource(),
+                localStorageService: localStorageService,
               ),
             ),
           ],

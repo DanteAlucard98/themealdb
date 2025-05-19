@@ -16,6 +16,7 @@ class DetailMealsScreen extends StatelessWidget {
     final specificBloc = context.read<SpecificBloc>();
     specificBloc.add(FetchMealById(mealId));
 
+    //Devolver el widget
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: AppColors.background,

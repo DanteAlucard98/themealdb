@@ -1,5 +1,6 @@
 import 'package:recetas_adpp_2025/domain/entities/list_meal.dart';
 
+//Estado de las comidas
 enum MealsStatus { initial, loading, success, failure, loadingMore }
 
 class MealsState {
@@ -11,6 +12,7 @@ class MealsState {
   final int currentPage;
   final int alphabet;
 
+  //Constructor de los estados
   MealsState({
     this.status = MealsStatus.initial,
     this.meals = const [], //lista de comidas
@@ -21,6 +23,7 @@ class MealsState {
     this.alphabet = 0,  // 0 representa 'a', 1 representa 'b', etc.
   });
 
+  //Copiar los estados
   MealsState copyWith({
     MealsStatus? status,
     List<ListMeal>? meals,

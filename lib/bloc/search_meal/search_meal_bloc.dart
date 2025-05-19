@@ -7,10 +7,12 @@ import 'package:recetas_adpp_2025/infraestructure/services/local_storage_service
 part 'search_meal_event.dart';
 part 'search_meal_state.dart';
 
+//Bloc para la búsqueda de comidas
 class SearchMealBloc extends Bloc<SearchMealEvent, SearchMealState> {
   final SearchMealDatasource _searchMealDatasource;
   final LocalStorageService _localStorageService;
 
+  //Constructor de la búsqueda de comidas
   SearchMealBloc({
     required SearchMealDatasource searchMealDatasource,
     required LocalStorageService localStorageService,
@@ -21,9 +23,10 @@ class SearchMealBloc extends Bloc<SearchMealEvent, SearchMealState> {
     on<LoadLastSearchResults>(_onLoadLastSearchResults);
   }
 
+  //Cargar la búsqueda de comidas
   Future<void> _onFetchSearchMeal(FetchSearchMeal event, Emitter<SearchMealState> emit) async {
     try {
-      // Set state to loading and reset the found meals
+      // Establecer el estado a cargando y reiniciar las comidas encontradas
       emit(state.copyWith(status: SearchMealStatus.loading, searchMeals: []));
       
       List<Meal> searchMeals;
@@ -48,16 +51,20 @@ class SearchMealBloc extends Bloc<SearchMealEvent, SearchMealState> {
     }
   }
 
+  //Cargar los últimos resultados de la búsqueda
   Future<void> _onLoadLastSearchResults(LoadLastSearchResults event, Emitter<SearchMealState> emit) async {
     try {
+      // Obtener los últimos resultados de la búsqueda
       final lastSearchResults = _localStorageService.getLastSearchResults();
       if (lastSearchResults.isNotEmpty) {
+        // Emitir el estado de éxito con los resultados de la búsqueda
         emit(state.copyWith(
           status: SearchMealStatus.success,
           searchMeals: lastSearchResults,
         ));
       }
     } catch (e) {
+      // Emitir el estado de error con el mensaje de error
       emit(state.copyWith(
         status: SearchMealStatus.failure,
         errorMessage: 'Error al cargar los últimos resultados: ${e.toString()}',

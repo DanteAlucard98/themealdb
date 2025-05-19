@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:recetas_adpp_2025/services/connectivity_service.dart';
 import 'dart:async';
 
+//Imagen de red con fallback
 class NetworkImageWithFallback extends StatefulWidget {
   final String imageUrl;
   final double? width;
@@ -24,11 +25,13 @@ class NetworkImageWithFallback extends StatefulWidget {
   State<NetworkImageWithFallback> createState() => _NetworkImageWithFallbackState();
 }
 
+//Estado de la imagen de red con fallback
 class _NetworkImageWithFallbackState extends State<NetworkImageWithFallback> {
   final ConnectivityService _connectivityService = ConnectivityService();
   Timer? _connectivityTimer;
   StreamSubscription<ConnectivityResult>? _connectivitySubscription;
 
+  //Inicializar el estado de la imagen de red con fallback
   @override
   void initState() {
     super.initState();
@@ -45,6 +48,7 @@ class _NetworkImageWithFallbackState extends State<NetworkImageWithFallback> {
     });
   }
 
+  //Disponer de la imagen de red con fallback
   @override
   void dispose() {
     _connectivityTimer?.cancel();
@@ -52,6 +56,7 @@ class _NetworkImageWithFallbackState extends State<NetworkImageWithFallback> {
     super.dispose();
   }
 
+  //Verificar la conectividad
   Future<void> _checkConnectivity() async {
     if (mounted) {
       await _connectivityService.checkConnectivity(context);
@@ -59,6 +64,7 @@ class _NetworkImageWithFallbackState extends State<NetworkImageWithFallback> {
     }
   }
 
+  //Construir el widget de fallback
   Widget _buildFallbackWidget() {
     return Container(
       width: widget.width,
@@ -97,6 +103,7 @@ class _NetworkImageWithFallbackState extends State<NetworkImageWithFallback> {
     );
   }
 
+  //Construir el widget de la imagen de red con fallback
   @override
   Widget build(BuildContext context) {
     if (!_connectivityService.hasInternet) {

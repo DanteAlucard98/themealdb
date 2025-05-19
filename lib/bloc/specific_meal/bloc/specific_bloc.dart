@@ -6,10 +6,12 @@ import 'package:recetas_adpp_2025/infraestructure/services/local_storage_service
 
 part 'specific_state.dart';
 
+//Bloc para la comida específica
 class SpecificBloc extends Bloc<SpecificEvent, SpecificState> {
   final MealDatasource _mealDatasource;
   final LocalStorageService _localStorageService;
 
+  //Constructor de la comida específica
   SpecificBloc({
     required MealDatasource mealDatasource,
     required LocalStorageService localStorageService,
@@ -20,6 +22,7 @@ class SpecificBloc extends Bloc<SpecificEvent, SpecificState> {
     on<LoadLastMealDetails>(_onLoadLastMealDetails);
   }
 
+  //Cargar la comida específica
   Future<void> _onSpecificEvent(FetchMealById event, Emitter<SpecificState> emit) async {
     try {
       emit(state.copyWith(
@@ -54,6 +57,7 @@ class SpecificBloc extends Bloc<SpecificEvent, SpecificState> {
     }
   }
 
+  //Cargar los últimos detalles de la comida
   Future<void> _onLoadLastMealDetails(LoadLastMealDetails event, Emitter<SpecificState> emit) async {
     try {
       final lastMeal = _localStorageService.getLastMealDetails();

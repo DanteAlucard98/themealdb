@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 
 class ConnectivityService {
   static final ConnectivityService _instance = ConnectivityService._internal();
+  
   factory ConnectivityService() => _instance;
   
   ConnectivityService._internal() {
+    _initializeConnectivity();
     // Inicializar el listener de conectividad
     Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
   }
@@ -14,6 +16,11 @@ class ConnectivityService {
   bool _previousState = true;
 
   bool get hasInternet => _hasInternet;
+
+  Future<void> _initializeConnectivity() async {
+    final result = await Connectivity().checkConnectivity();
+    _hasInternet = result != ConnectivityResult.none;
+  }
 
   void _updateConnectionStatus(ConnectivityResult result) {
     _hasInternet = result != ConnectivityResult.none;

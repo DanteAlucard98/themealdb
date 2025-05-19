@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:recetas_adpp_2025/bloc/favorite_meals/favorite_meals_bloc.dart';
 import 'package:recetas_adpp_2025/services/favorites_service.dart';
 
+//Botón de favorito
 class FavoriteButton extends StatefulWidget {
   final String mealId;
   final double size;
   final Color? color;
   final Function(bool)? onFavoriteChanged;
 
+  //Constructor del botón de favorito
   const FavoriteButton({
     Key? key,
     required this.mealId,
@@ -21,17 +23,20 @@ class FavoriteButton extends StatefulWidget {
   State<FavoriteButton> createState() => _FavoriteButtonState();
 }
 
+//Estado del botón de favorito
 class _FavoriteButtonState extends State<FavoriteButton> {
   final FavoritesService _favoritesService = FavoritesService();
   bool _isFavorite = false;
   bool _isInitialized = false;
 
+  //Inicializar el estado del botón de favorito
   @override
   void initState() {
     super.initState();
     _checkFavoriteStatus();
   }
 
+  //Verificar el estado del botón de favorito
   Future<void> _checkFavoriteStatus() async {
     final isFavorite = await _favoritesService.isFavorite(widget.mealId);
     if (mounted && !_isInitialized) {
@@ -42,6 +47,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
     }
   }
 
+  //Cambiar el estado del botón de favorito
   Future<void> _toggleFavorite() async {
     await _favoritesService.toggleFavorite(widget.mealId);
     if (mounted) {
@@ -50,7 +56,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
       });
       widget.onFavoriteChanged?.call(_isFavorite);
       
-      // Notify the FavoriteMealsBloc to refresh the list
+      // Notificar al FavoriteMealsBloc para actualizar la lista
       if (context.mounted) {
         context.read<FavoriteMealsBloc>().add(RefreshFavoriteMeals());
       }
