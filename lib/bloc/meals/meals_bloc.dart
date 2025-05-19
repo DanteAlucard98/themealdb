@@ -56,7 +56,7 @@ class MealsBloc extends Bloc<MealsEvent, MealsState> {
         // Si falla la API, intentar cargar los datos locales
         final localMeals = _localStorageService.getLastListMeals();
         if (localMeals.isEmpty) {
-          throw Exception('No se pudieron cargar los datos');
+          throw Exception('Unable to load data');
         }
 
         emit(state.copyWith(
@@ -148,7 +148,7 @@ class MealsBloc extends Bloc<MealsEvent, MealsState> {
         // Si falla la API, intentar cargar los datos locales
         final localMeals = _localStorageService.getLastListMeals();
         if (localMeals.isEmpty) {
-          throw Exception('No se pudieron cargar más datos');
+          throw Exception('Unable to load more data');
         }
 
         // Combinar las comidas actuales con las locales
@@ -183,7 +183,7 @@ class MealsBloc extends Bloc<MealsEvent, MealsState> {
     } catch (e) {
       emit(state.copyWith(
         status: MealsStatus.failure,
-        errorMessage: 'Error al cargar la última lista: ${e.toString()}',
+        errorMessage: 'Error loading the last list: ${e.toString()}',
       ));
     }
   }

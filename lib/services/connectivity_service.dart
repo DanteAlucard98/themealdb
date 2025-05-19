@@ -37,7 +37,7 @@ class ConnectivityService {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            _hasInternet ? 'Conexión a Internet disponible' : 'Sin conexión a Internet',
+            _hasInternet ? 'Internet connection available' : 'No internet connection',
             style: const TextStyle(color: Colors.white),
           ),
           backgroundColor: _hasInternet ? Colors.green : Colors.red,

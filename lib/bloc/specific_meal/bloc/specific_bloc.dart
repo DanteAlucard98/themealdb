@@ -41,7 +41,7 @@ class SpecificBloc extends Bloc<SpecificEvent, SpecificState> {
         // Si falla la API, intentar cargar los datos locales
         meal = _localStorageService.getLastMealDetails();
         if (meal == null) {
-          throw Exception('No se pudieron cargar los datos de la receta');
+          throw Exception('Unable to load data');
         }
       }
 

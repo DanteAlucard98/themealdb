@@ -39,7 +39,7 @@ class SearchMealBloc extends Bloc<SearchMealEvent, SearchMealState> {
         // Si falla la API, intentar cargar los datos locales
         searchMeals = _localStorageService.getLastSearchResults();
         if (searchMeals.isEmpty) {
-          throw Exception('No se pudieron cargar los datos');
+          throw Exception('Unable to load data');
         }
       }
       
